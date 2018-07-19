@@ -8,7 +8,7 @@
                 "description":"Subscription Id of the Azure Subscription"
             }
         },
-        "ResourceGroupName":{
+        "ResourceGroup":{
             "type": "string",
             "metadata": {
                 "description":"Resource Group Name for deploying the applications"
@@ -39,13 +39,13 @@
                 "description":"Resource URL to change in Application settings for Api App"
             }
         },
-        "HosterUsername":{
+        "AzureLoginID":{
             "type": "string",
             "metadata": {
                 "description": "UserName of the Subscription"
             }
         },
-        "HosterPassword": { 
+        "AzurePassword": { 
         "type": "securestring",
         "metadata": {
             "description": "Password of the Subscription"
@@ -200,7 +200,7 @@
                             "fileUris": [
                                 "https://raw.githubusercontent.com/prasanth123n/New-rdmi-saas-offering/master/Scripts/New-RdmiMgmtSetupScript.ps1"
                             ],
-                            "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File New-RdmiMgmtSetup.ps1', ' -SubscriptionId \"', parameters('SubscriptionId'), '\"',' ',  ' -ResourceGroupName \"', parameters('ResourceGroupName'), '\"',' ', ' -Location \"', parameters('Location'), '\"',' ', ' -ApplicationID \"', parameters('ApplicationID'), '\"',' ', ' -RDBrokerURL \"', parameters('RDBrokerURL'), '\"',' ', ' -ResourceURL \"', parameters('ResourceURL'), '\"',' ',' -UserName \"', parameters('HosterUsername'), '\"',' ',' -Password \"', parameters('HosterPassword'), '\"',' ',' -RGName \"', variables('RgName'), '\"',' ',' -fileURI \"', variables('FileUri'), '\"')]"
+                            "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File New-RdmiMgmtSetupScript.ps1', ' -SubscriptionId \"', parameters('SubscriptionId'), '\"',' ',  ' -ResourceGroupName \"', parameters('ResourceGroup'), '\"',' ', ' -Location \"', parameters('Location'), '\"',' ', ' -ApplicationID \"', parameters('ApplicationID'), '\"',' ', ' -RDBrokerURL \"', parameters('RDBrokerURL'), '\"',' ', ' -ResourceURL \"', parameters('ResourceURL'), '\"',' ',' -UserName \"', parameters('AzureLoginID'), '\"',' ',' -Password \"', parameters('AzurePassword'), '\"',' ',' -RGName \"', variables('RgName'), '\"',' ',' -fileURI \"', variables('FileUri'), '\"')]"
                         }
                     },
                     "dependsOn": [

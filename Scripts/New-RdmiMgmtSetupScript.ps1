@@ -63,6 +63,14 @@ Param(
     [ValidateNotNullOrEmpty()]
     [string] $fileURI,
 
+    [Parameter(Mandatory=$False)]
+    [ValidateNotNullOrEmpty()]
+    [string] $vmUsername,
+    
+    [Parameter(Mandatory=$False)]
+    [ValidateNotNullOrEmpty()]
+    [string] $vmPassword,
+
     [Parameter(Mandatory = $False)]
     [ValidateNotNullOrEmpty()]
     [string] $CodeBitPath= "C:\msft-rdmi-saas-offering\msft-rdmi-saas-offering",
@@ -347,11 +355,16 @@ try
             Write-Output "Api URL : http://$ApiUrl"
             Write-Output "Web URL : http://$WebUrl"
             
-            Set-Location $CodeBitPath
-            .\RemoveRG.ps1 -RGName $RGName -Location $Location
        }
         
     }
+    $SecurePass=ConvertTo-SecureString -String $vmPassword -AsPlainText -Force
+    $localcred=New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList ($vmUsername, $Securepass)
+    Invoke-Command -ComputerName localhost -Credential $localcred -ScriptBlock{
+    param($SubscriptionId,$UserName,$Password,$RGName, $Location)
+    Set-Location $CodeBitPath
+    .\RemoveRG.ps1 -SubscriptionId $SubscriptionId -Username $UserName -Password $Password -RGName $RGName -Location $Location
+    } -ArgumentList($SubscriptionId,$UserName,$Password,$RGName, $Location) -AsJob
 
 }
 catch [Exception]

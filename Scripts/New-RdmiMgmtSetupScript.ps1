@@ -351,8 +351,7 @@ try
        }
         
     }
-    Set-Location $CodeBitPath
-    .\RemoveRG.ps1 -SubscriptionId $SubscriptionId -RGName $RGName -UserName $UserName -Password $Password
+    
 }
 catch [Exception]
 {

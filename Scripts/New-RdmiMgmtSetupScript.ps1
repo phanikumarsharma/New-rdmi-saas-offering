@@ -81,7 +81,11 @@ Param(
       
     [Parameter(Mandatory = $False)]
     [ValidateNotNullOrEmpty()]
-    [string]$ApiAppExtractionPath = ".\msft-rdmi-saas-api\msft-rdmi-saas-api.zip"
+    [string]$ApiAppExtractionPath = ".\msft-rdmi-saas-api\msft-rdmi-saas-api.zip",
+
+    [Parameter(Mandatory = $False)]
+    [ValidateNotNullOrEmpty()]
+    [string] $RGName
    
       
 )
@@ -343,7 +347,8 @@ try
             Write-Output "Api URL : http://$ApiUrl"
             Write-Output "Web URL : http://$WebUrl"
             
-
+            Set-Location $CodeBitPath
+            .\RemoveRG.ps1 -RGName $RGName -Location $Location
        }
         
     }

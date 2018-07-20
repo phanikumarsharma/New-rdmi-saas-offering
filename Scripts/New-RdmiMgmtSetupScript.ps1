@@ -347,17 +347,13 @@ try
 
             Write-Output "Api URL : http://$ApiUrl"
             Write-Output "Web URL : http://$WebUrl"
-            
        }
-        
     }
-    
+    Set-Location $CodeBitPath
+    .\RemoveRG.ps1 -SubscriptionId $SubscriptionId -RGName $RGName -UserName $UserName -Password $Password 
+
 }
 catch [Exception]
 {
     Write-Output $_.Exception.Message
 }
-
-
- 
-
